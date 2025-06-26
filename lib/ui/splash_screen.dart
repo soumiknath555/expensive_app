@@ -1,4 +1,5 @@
 import 'package:expense_app/ui/home_page.dart';
+import 'package:expense_app/ui/login_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +61,7 @@ class SplahScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(onPressed: (){
 
         Navigator.push(context, MaterialPageRoute(builder: (context){
-          return Home_Page();
+          return LoginPage();
         }));
       },
         backgroundColor: Colors.pinkAccent,

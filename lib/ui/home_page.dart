@@ -44,7 +44,7 @@ class _Home_PageState extends State<Home_Page> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           image: DecorationImage(
-                              image: AssetImage("assets/images/splash_main_image.png"),
+                              image: AssetImage("assets/images/soumik_profile.jpg"),
                           fit: BoxFit.cover)
                         ),
                          ) ,
@@ -63,7 +63,9 @@ class _Home_PageState extends State<Home_Page> {
                     Container(
                       width: 140,
                       height: 50,
-                      color: Colors.blue.shade50,
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade50,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -90,7 +92,7 @@ class _Home_PageState extends State<Home_Page> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Expense total',style: TextStyle(color: Colors.white,fontSize: 15),),
-                      Text('\$3734',style: TextStyle(color: Colors.white, fontSize: 50,fontWeight: FontWeight.bold),),
+                      Text('\$3734',style: TextStyle(color: Colors.white, fontSize: 40,fontWeight: FontWeight.bold),),
                       Row(
                         children: [
                           Container(
@@ -107,7 +109,7 @@ class _Home_PageState extends State<Home_Page> {
 
               SizedBox(height: 10,),
 
-              Text('Expense List',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+              Text('Expense List',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
 
               Container(
                 width: double.infinity,
@@ -127,7 +129,7 @@ class _Home_PageState extends State<Home_Page> {
                         children: [
                           Text('Tuesday,18',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                           Spacer(),
-                          Text('\$ 1380',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)
+                          Text('\$ 1380',style: TextStyle(fontSize: 20),)
                         ],
                       ),
                       SizedBox(height: 5,),
@@ -153,7 +155,7 @@ class _Home_PageState extends State<Home_Page> {
                             ],
                           ),
                           Spacer(),
-                          Text('-\$ 90',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.pink.shade200),)
+                          Text('-\$ 90',style: TextStyle(fontSize: 20,color: Colors.pink.shade200),)
                         ],
                       ),
                       SizedBox(height: 10,),
@@ -174,7 +176,7 @@ class _Home_PageState extends State<Home_Page> {
                             ],
                           ),
                           Spacer(),
-                          Text('-\$ 1290',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.pink.shade200),)
+                          Text('-\$ 1290',style: TextStyle(fontSize: 20,color: Colors.pink.shade200),)
                         ],
                       ),
 
@@ -202,7 +204,7 @@ class _Home_PageState extends State<Home_Page> {
                         children: [
                           Text('Monday,15',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                           Spacer(),
-                          Text('\$ 80',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)
+                          Text('\$ 80',style: TextStyle(fontSize: 20),)
                         ],
                       ),
                       SizedBox(height: 5,),
@@ -228,7 +230,7 @@ class _Home_PageState extends State<Home_Page> {
                             ],
                           ),
                           Spacer(),
-                          Text('-\$ 60',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,color: Colors.pink.shade200),)
+                          Text('-\$ 60',style: TextStyle(fontSize: 20,color: Colors.pink.shade200),)
                         ],
                       ),
 
