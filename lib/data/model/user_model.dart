@@ -1,3 +1,4 @@
+import 'package:expense_app/data/helper/db_helper.dart';
 import 'package:flutter/foundation.dart';
 
 class UserModel {
@@ -18,15 +19,23 @@ class UserModel {
  /// convert map into model......
  factory UserModel.fromMap(Map<String,dynamic> map){
    return UserModel(
-       name: name,
-       email: email,
-       mobNo: mobNo,
-       pass: pass
+       id: map[DBHelper.COLUMN_USER_ID],
+       name: map[DBHelper.COLUMN_USER_NAME],
+       email: map[DBHelper.COLUMN_USER_EMAIL],
+       mobNo: map[DBHelper.COLUMN_USER_MOB_NO],
+       pass: map[DBHelper.COLUMN_USER_PASS]
    );
  }
 
 /// convert model into map ......
-
+ Map<String,dynamic> toMap (){
+   return {
+     DBHelper.COLUMN_USER_NAME : name,
+     DBHelper.COLUMN_USER_EMAIL : email,
+     DBHelper.COLUMN_USER_MOB_NO : mobNo,
+     DBHelper.COLUMN_USER_PASS : pass,
+   };
+ }
 
 
 }
