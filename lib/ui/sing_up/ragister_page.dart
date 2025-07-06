@@ -2,6 +2,7 @@ import 'package:expense_app/data/model/user_model.dart';
 import 'package:expense_app/routes/app_routes.dart';
 import 'package:expense_app/ui/sing_up/bloc/user_bloc.dart';
 import 'package:expense_app/ui/sing_up/bloc/user_event.dart';
+import 'package:expense_app/ui/sing_up/bloc/user_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,6 +11,8 @@ class RegisterPage extends StatelessWidget {
   TextEditingController passController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController mobContriller = TextEditingController();
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class RegisterPage extends StatelessWidget {
               SizedBox(height: 11),
 
               TextField(
+                controller:  nameController,
                 decoration: InputDecoration(
                   fillColor: Colors.green.shade50,
                   filled: true,
@@ -56,6 +60,7 @@ class RegisterPage extends StatelessWidget {
               SizedBox(height: 11),
 
               TextField(
+                controller: mobContriller ,
                 decoration: InputDecoration(
                   label: Text("Phone Number"),
                   hintText: "Phone Number",
@@ -74,6 +79,7 @@ class RegisterPage extends StatelessWidget {
               SizedBox(height: 11),
 
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   label: Text("Email"),
                   hintText: "Email",
@@ -93,6 +99,7 @@ class RegisterPage extends StatelessWidget {
               SizedBox(height: 11),
 
               TextField(
+                controller: passController,
                 decoration: InputDecoration(
                   label: Text("Password"),
                   hintText: "Password",
@@ -111,34 +118,83 @@ class RegisterPage extends StatelessWidget {
 
               SizedBox(height: 11),
 
-              SizedBox(
-                width: 150,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    /// SingUp / Register.....
+              StatefulBuilder(
+                builder: (context, ss) {
+                  return SizedBox(
+                    width: double.infinity,
+                    height: 60,
+                    child: BlocListener<UserBloc, UserState>(
+                      listener: (context, state) {
+                        if (state is UserLoadingState) {
+                          isLoading = true;
+                          ss(() {});
+                        }
 
-                    UserModel mUser = UserModel(
-                      name: nameController.text,
-                      email: emailController.text,
-                      mobNo: mobContriller.text,
-                      pass: passController.text,
-                    );
+                        if (state is UserSuccessState) {
+                          isLoading = false;
+                          ss(() {});
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Successfully Registered!!"),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
 
-                    context.read<UserBloc>().add(SingUpEvent(user: mUser));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                  ),
-                  child: Text(
-                    "Register",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                        if (state is UserFailureState) {
+                          isLoading = false;
+                          ss(() {});
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(" ${state.errorMsg}"),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+
+                        }
+                      },
+                      child: ElevatedButton(
+                        onPressed: () {
+                          /// SingUp / Register.....
+
+                          UserModel mUser = UserModel(
+                            name: nameController.text,
+                            email: emailController.text,
+                            mobNo: mobContriller.text,
+                            pass: passController.text,
+                          );
+
+                          context.read<UserBloc>().add(
+                            SingUpEvent(user: mUser),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.lightGreen,
+                        ),
+                        child: isLoading
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 11),
+                                  Text("Loading"),
+                                ],
+                              )
+                            : Text(
+                                "Register",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
 
               SizedBox(height: 15),

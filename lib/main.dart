@@ -1,12 +1,27 @@
+import 'package:expense_app/data/helper/db_helper.dart';
+import 'package:expense_app/data/repository/user_repository.dart';
 import 'package:expense_app/routes/app_routes.dart';
-import 'package:expense_app/ui/splash_screen.dart';
+import 'package:expense_app/ui/sing_up/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main (){
+void main() {
+  runApp(
+    BlocProvider(
+      create: (context) => UserBloc(
+        userRepository: UserRepository(dbHelper: DBHelper.getInstance()),
+      ), child: MyApp(),
+    ),
+  );
+}
 
-  runApp(MaterialApp(
-    initialRoute: AppRoutes.SPLASH_PAGE,
-    routes: AppRoutes.routes,
-  ));
-
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MaterialApp(
+      initialRoute: AppRoutes.SPLASH_PAGE,
+      routes: AppRoutes.routes,
+    );
+  }
 }
