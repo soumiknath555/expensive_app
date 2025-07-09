@@ -1,5 +1,4 @@
 import 'package:expense_app/routes/app_routes.dart';
-import 'package:expense_app/ui/home_page.dart';
 import 'package:expense_app/ui/sing_up/bloc/user_bloc.dart';
 import 'package:expense_app/ui/sing_up/bloc/user_event.dart';
 import 'package:expense_app/ui/sing_up/bloc/user_state.dart';
@@ -137,7 +136,7 @@ class LoginPage extends StatelessWidget {
                     if(state is UserSuccessState){
                       isLoding = false;
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Successfully!!!")));
-                      Navigator.pushReplacementNamed(context, AppRoutes.HOME_PAGE);
+                      Navigator.pushReplacementNamed(context, AppRoutes.DASHBOARD_PAGE);
                     }
                   },
                   builder: (context, state) {

@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:expense_app/routes/app_routes.dart';
-import 'package:expense_app/ui/home_page.dart';
-import 'package:expense_app/ui/login_page.dart';
+import 'package:expense_app/ui/login/login_page.dart';
 import 'package:expense_app/utils/app_constance.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,7 @@ class _SplahScreenState extends State<SplahScreen> {
     String navigateToName = AppRoutes.LOGIN_PAGE ;
     
     if (uid >0) {
-      navigateToName = AppRoutes.HOME_PAGE ;
+      navigateToName = AppRoutes.DASHBOARD_PAGE ;
     }
     Navigator.pushReplacementNamed(context, navigateToName);
   }
