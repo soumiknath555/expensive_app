@@ -398,6 +398,11 @@ class _Home_PageState extends State<Home_Page> {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.pushNamed(context, AppRoutes.ADD_EXPANCE_PAGE);
+      },
+        backgroundColor: Colors.lightGreen,
+        child: Icon(Icons.add,color: Colors.black,),),
     );
   }
 }

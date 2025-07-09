@@ -1,3 +1,4 @@
+import 'package:expense_app/ui/add_page/add_page.dart';
 import 'package:expense_app/ui/home_page.dart';
 import 'package:expense_app/ui/login_page.dart';
 import 'package:expense_app/ui/sing_up/ragister_page.dart';
@@ -20,6 +21,7 @@ class AppRoutes {
     HOME_PAGE : (context) => Home_Page(),
     LOGIN_PAGE : (context) => LoginPage(),
    REGISTER_PAGE : (context) => RegisterPage(),
+   ADD_EXPANCE_PAGE : (context) => AddPage(),
   };
 
 }
