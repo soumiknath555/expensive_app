@@ -41,7 +41,7 @@ class ExpenseModel {
   Map<String,dynamic> toMap (){
     return {
       DBHelper.COLUMN_USER_ID: user_id,
-      DBHelper.COLUMN_EXPENSE_TYPE: title,
+      DBHelper.COLUMN_EXPENSE_TITLE: title,
       DBHelper.COLUMN_EXPENSE_DESCRIPTION: description,
       DBHelper.COLUMN_EXPENSE_AMOUNT: amt,
       DBHelper.COLUMN_EXPENSE_BALLENCE: bal,

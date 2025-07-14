@@ -55,7 +55,7 @@ class DBHelper {
           "CREATE TABLE $TABLE_USER ($COLUMN_USER_ID INTEGER PRIMARY KEY AUTOINCREMENT , $COLUMN_USER_NAME TEXT ,$COLUMN_USER_EMAIL TEXT, $COLUMN_USER_MOB_NO TEXT , $COLUMN_USER_PASS TEXT)",
         );
         db.execute(
-          "CREATE TABLE $TABLE_EXPENSE("
+          "CREATE TABLE $TABLE_EXPENSE ("
               "$COLUMN_EXPENSE_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
               " $COLUMN_USER_ID INTEGER ,"
               "$COLUMN_EXPENSE_TITLE TEXT , "
@@ -119,7 +119,7 @@ class DBHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int uid = prefs.getInt(AppConstance.PREF_USER_ID_KEY) ?? 0;
     List<Map<String, dynamic>> mData = await db.query(
-      TABLE_EXPENSE, where: '$COLUMN_EXPENSE_ID =?',
+      TABLE_EXPENSE, where: '$COLUMN_USER_ID =?',
       whereArgs: ["$uid"],
     );
     List<ExpenseModel> allExp = [];
