@@ -1,8 +1,9 @@
 import 'package:expense_app/ui/add_page/add_page.dart';
-import 'package:expense_app/ui/dasboard_pages/nav_pages/home/home_page.dart';
-import 'package:expense_app/ui/dasboard_pages/nav_pages/stats/stats_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'nav_pages/home/home_page.dart';
+import 'nav_pages/stats/stats_page.dart';
 
 class DashboardPage extends StatefulWidget {
 

@@ -1,13 +1,13 @@
 import 'package:expense_app/ui/add_page/add_page.dart';
-import 'package:expense_app/ui/dasboard_pages/dashboard_page.dart';
-import 'package:expense_app/ui/dasboard_pages/nav_pages/stats/stats_page.dart';
 import 'package:expense_app/ui/login/login_page.dart';
 import 'package:expense_app/ui/sing_up/ragister_page.dart';
 import 'package:expense_app/ui/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 
-import '../ui/dasboard_pages/nav_pages/home/home_page.dart';
+
+import '../ui/dashboard_pages/dashboard_page.dart';
+import '../ui/dashboard_pages/nav_pages/stats/stats_page.dart';
 
 class AppRoutes {
 
@@ -22,7 +22,7 @@ class AppRoutes {
 
     SPLASH_PAGE : (context) => SplahScreen(),
     DASHBOARD_PAGE : (context) => DashboardPage(),
-    LOGIN_PAGE : (context) => LoginPage(),
+    LOGIN_PAGE : (context) => LoginScreen(),
     REGISTER_PAGE : (context) => RegisterPage(),
     ADD_EXPANCE_PAGE : (context) => AddPage(),
     STATS_PAGE : (context) => StatsPage(),

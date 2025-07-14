@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -104,7 +105,7 @@ class StatsPage extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 300,
-                color: Colors.green.shade50,
+                // color: Colors.green.shade50,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -150,6 +151,42 @@ class StatsPage extends StatelessWidget {
                         Text("/ week",style: TextStyle(fontSize: 15,color: Colors.black54),),
                       ],
                     ),
+                    Expanded(
+                      child: Container(
+                        // height: 250,
+                        width: double.infinity,
+
+                        child: BarChart(
+                            BarChartData(
+                                maxY: 100,
+                                barGroups: [
+                                  BarChartGroupData(x: 0,
+                                      barRods: [
+                                        _barUI(toY: 65, color: Colors.red)
+                                      ]),
+                                  BarChartGroupData(x: 1,
+                                      barRods: [
+                                        _barUI(toY: 49, color: Colors.blue)
+                                      ]),
+                                  BarChartGroupData(x: 2,
+                                      barRods: [
+                                       _barUI(toY: 78, color: Colors.green)
+                                      ]),
+                                  BarChartGroupData(x: 3,
+                                      barRods: [
+                                        _barUI(toY: 45, color: Colors.yellow)
+                                      ]),
+                                  BarChartGroupData(x: 4,
+                                      barRods: [
+                                        _barUI(toY: 95, color: Colors.purple)
+                                      ]),
+                                ]
+                            )
+                        ),
+                      ),
+                    )
+
+
                   ],
                 ),
               ),
@@ -171,12 +208,21 @@ class StatsPage extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 1,),
+                    Text("Your expense are divided into 6 categories",
+                      style: TextStyle(fontSize: 16, color: Colors.black54),),
+                    SizedBox(height: 11,),
                     Row(
                       children: [
-                        Text("Your expense are divided into 6 categories",style: TextStyle(fontSize: 16,color: Colors.black54),),
-
+                        Container(
+                          width: 25,
+                          height: 25,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(11),
+                          ),
+                        )
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -186,5 +232,14 @@ class StatsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  BarChartRodData _barUI ({required double toY , required Color color}){
+    return BarChartRodData(toY: toY,
+        color: color,
+        width: 15,
+        borderRadius :BorderRadius.only(
+            topLeft: Radius.circular(11),
+            topRight: Radius.circular(11)));
   }
 }

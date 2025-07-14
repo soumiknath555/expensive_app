@@ -138,7 +138,7 @@ class RegisterPage extends StatelessWidget {
                               content: Text("Successfully Registered!!"),
                             ),
                           );
-                          Navigator.pop(context);
+                          Navigator.pushNamed(context, AppRoutes.LOGIN_PAGE);
                         }
 
                         if (state is UserFailureState) {
@@ -168,6 +168,8 @@ class RegisterPage extends StatelessWidget {
                           context.read<UserBloc>().add(
                             SingUpEvent(user: mUser),
                           );
+                          Navigator.pushNamed(context, AppRoutes.LOGIN_PAGE);
+                          
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.lightGreen,

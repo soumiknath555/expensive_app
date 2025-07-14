@@ -92,7 +92,7 @@ class _SplahScreenState extends State<SplahScreen> {
       floatingActionButton: FloatingActionButton(onPressed: (){
 
         Navigator.push(context, MaterialPageRoute(builder: (context){
-          return LoginPage();
+          return LoginScreen();
         }));
       },
         backgroundColor: Colors.pinkAccent,

@@ -1,9 +1,9 @@
 class CatagoryModel {
-  int id;
+  int catId;
   String catName;
   String catIamge;
 
-  CatagoryModel({required this.id, required this.catName, required this.catIamge});
+  CatagoryModel({required this.catId, required this.catName, required this.catIamge});
 
 
 }

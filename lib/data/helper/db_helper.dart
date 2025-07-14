@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:expense_app/data/model/expance_model.dart';
 import 'package:expense_app/data/model/user_model.dart';
 import 'package:expense_app/utils/app_constance.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,15 +27,15 @@ class DBHelper {
 
   /// EXPANSE TABLE .....................
 
-  static const TABLE_EXPANSE = "expanse";
-  static const COLUMN_EXPANSE_ID = "expanse_id";
-  static const COLUMN_EXPANSE_TITLE = "expanse_title";
-  static const COLUMN_EXPANSE_DESCRIPTION = "expanse_description";
-  static const COLUMN_EXPANSE_AMOUNT = "expanse_amount";
-  static const COLUMN_EXPANSE_BALLENCE = "expance_ballence";
-  static const COLUMN_EXPANSE_CREATED_AT = "created_at";
-  static const COLUMN_EXPANSE_CAT_ID = "cat_id";
-  static const COLUMN_EXPANSE_TYPE = "expance_type";
+  static const TABLE_EXPENSE = "expanse";
+  static const COLUMN_EXPENSE_ID = "expanse_id";
+  static const COLUMN_EXPENSE_TITLE = "expanse_title";
+  static const COLUMN_EXPENSE_DESCRIPTION = "expanse_description";
+  static const COLUMN_EXPENSE_AMOUNT = "expanse_amount";
+  static const COLUMN_EXPENSE_BALLENCE = "expance_ballence";
+  static const COLUMN_EXPENSE_CREATED_AT = "created_at";
+  static const COLUMN_EXPENSE_CAT_ID = "cat_id";
+  static const COLUMN_EXPENSE_TYPE = "expance_type";
 
   Future<Database> initDB() async {
     if (mDB == null) {
@@ -54,7 +55,16 @@ class DBHelper {
           "CREATE TABLE $TABLE_USER ($COLUMN_USER_ID INTEGER PRIMARY KEY AUTOINCREMENT , $COLUMN_USER_NAME TEXT ,$COLUMN_USER_EMAIL TEXT, $COLUMN_USER_MOB_NO TEXT , $COLUMN_USER_PASS TEXT)",
         );
         db.execute(
-          "CREATE TABLE $TABLE_EXPANSE($COLUMN_EXPANSE_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_USER_ID INTEGER ,$COLUMN_EXPANSE_TITLE TEXT , $COLUMN_EXPANSE_DESCRIPTION TEXT , $COLUMN_EXPANSE_AMOUNT INTEGER ,$COLUMN_EXPANSE_BALLENCE INTEGER ,$COLUMN_EXPANSE_CREATED_AT TEXT ,$COLUMN_EXPANSE_CAT_ID INTEGER, $COLUMN_EXPANSE_TYPE TEXT)",
+          "CREATE TABLE $TABLE_EXPENSE("
+              "$COLUMN_EXPENSE_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+              " $COLUMN_USER_ID INTEGER ,"
+              "$COLUMN_EXPENSE_TITLE TEXT , "
+              "$COLUMN_EXPENSE_DESCRIPTION TEXT , "
+              "$COLUMN_EXPENSE_AMOUNT INTEGER ,"
+              "$COLUMN_EXPENSE_BALLENCE INTEGER ,"
+              "$COLUMN_EXPENSE_CREATED_AT TEXT , "
+              "$COLUMN_EXPENSE_CAT_ID INTEGER,"
+              " $COLUMN_EXPENSE_TYPE INTEGER)",
         );
       },
     );
@@ -98,8 +108,35 @@ class DBHelper {
 
   }
 
+  Future<bool> addNewExpanse({required ExpenseModel newExp}) async {
+    var db = await initDB();
+    int rowsEffected = await db.insert(TABLE_EXPENSE, newExp.toMap());
+    return rowsEffected > 0;
+  }
 
+  Future<List<ExpenseModel>> getAllExpenses() async {
+    var db = await initDB();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int uid = prefs.getInt(AppConstance.PREF_USER_ID_KEY) ?? 0;
+    List<Map<String, dynamic>> mData = await db.query(
+      TABLE_EXPENSE, where: '$COLUMN_EXPENSE_ID =?',
+      whereArgs: ["$uid"],
+    );
+    List<ExpenseModel> allExp = [];
 
+    for (int i = 0; i < mData.length; i++) {
+      allExp.add(ExpenseModel.fromMap(mData[i]));
+    }
+    return allExp;
+  }
 
-
+  Future<bool> deleteExpanse({required int expanseId}) async {
+    var db = await initDB();
+    int rowsDeleted = await db.delete(
+      TABLE_EXPENSE,
+      where: '$COLUMN_EXPENSE_ID = ?',
+      whereArgs: [expanseId],
+    );
+    return rowsDeleted > 0;
+  }
 }
